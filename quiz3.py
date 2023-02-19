@@ -45,7 +45,7 @@ for train_index, test_index in cselection.split(X):
 
     classifier = SGDClassifier(max_iter=nitermax, eta0=eta)
     #computing the score
-    classifer.fit(X_train, y_train)
+    classifier.fit(X_train, y_train)
 
     #Apply the trained weight
     y_pred = np.zeros(y_test.shape[0])

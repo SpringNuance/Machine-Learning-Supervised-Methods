@@ -1,0 +1,41 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc} 
+
+\usepackage[margin=2cm]{geometry}
+
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parindent}{0pt}%
+
+% you can add packages if you need them, for example for maths:
+\usepackage{amssymb,amsmath}
+
+\begin{document}
+
+\textbf{MLSM exam 20.12.2021 - essay \\ Name and student number: Tat Hong Duong Le - 894834 }
+
+% do not change the settings that affect the page layout! 
+% remember to add your name and student number
+
+
+Boosting is a framework in esemble learning. It was proposed as an answer to the question of whether weak learners can be combined together to make a strong PAC learner. \\\\
+Boosting underlying principles is to combine multiple weak learners (those that have accuracy slightly better than random guessing) with weight according to their errors to make a stronger model. The weight of the examples will also adjusted during the training, and misclassified data points will receive a higher weight to promote diversity in the models. \\\\
+AdaBoost is a Boosting algorithm that is used in practice. It finds a linear combination of base models. Its inputs are labeled training examples $S = \{(x_i, y_i)^{m}_{i=1}\}$, a hypothesis class $H$ where we will take base hypotheses $h_i \in H$, and a distribution $D_t$, where the weight $D_t(i)$ for the training example are drawn. Given those inputs, then the output of AdaBoost is:
+\[
+f_T(x) = \sum_{t=1}^{T}{\alpha _t h_t(x)} \text{, $\quad  \alpha _t \geq 0$ }
+\]
+In each round $t$, a new weak learner $h_t$ that minimizes the empirical error on the sample will be added. The error $\epsilon _t$ and the weight $\alpha _t$ for the learner is calculated as follows:
+\[
+\begin{aligned}
+\epsilon _t &= \min_{h \in H} \sum_{i=1}^{m}D_t(i)1_{h(x_i) \neq y_i} \\
+\alpha_t &= \frac{1}{2}\log{\frac{1-\epsilon _t}{\epsilon _t}}
+\end{aligned}
+\]
+If the error is less than 0.5 (the weak learner is better than random guessing), then the weight for the model is positive. The training example is also updated as follow:
+\[
+D_{t+1}(i) = D_t(i) \cdot \frac{e^{-\alpha _ty_ih_t(x_i)}}{Z_t} 
+\]
+We can see that if the previous models misclassify an example, its weight will increase, thus future base learners will focus more on them. \\\\
+The AdaBoost has been shown to have an empirical error rate goes exponentially down in the number of classifiers used. Thus, if we have enough base classifiers, then the empirical error rate can be abitrarily low. It should also be noted that although AdaBoost is suggested to be overfitted when the number of base classifier is large, it has not been observed in practical.\\\\
+In conclusion, we can use Boosting in general to obtain a reasonably good machine learning model if we have access to base models that are relatively better than random guesses.
+
+\end{document}
